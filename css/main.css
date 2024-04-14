@@ -1199,9 +1199,38 @@ pre code {
 .use-motion .menu-item {
   visibility: hidden;
 }
+.book-mark-link {
+  border-bottom: 0;
+  position: fixed;
+  top: -10px;
+  transition: top 0.3s;
+  right: 30px;
+}
+@media (max-width: 991px) {
+  .book-mark-link {
+    right: 20px;
+  }
+}
+@media (max-width: 991px) {
+  .book-mark-link {
+    display: none;
+  }
+}
+.book-mark-link::before {
+  color: #222;
+  font-size: 32px;
+  line-height: 1;
+  content: '\f02e';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+}
+.book-mark-link:hover,
+.book-mark-link-fixed {
+  top: -2px;
+}
 .sidebar-inner {
   color: #999;
-  padding: 18px 10px;
+  padding: 24px 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -1557,6 +1586,13 @@ pre code {
   color: #f00;
   display: inline-block;
   margin: 0 5px;
+  animation: icon-animate 1.33s ease-in-out infinite;
+}
+.busuanzi-count #busuanzi_container_site_uv {
+  display: none;
+}
+.busuanzi-count #busuanzi_container_site_pv {
+  display: none;
 }
 @keyframes icon-animate {
   0%, 100% {
@@ -1574,45 +1610,33 @@ pre code {
 }
 .back-to-top {
   font-size: 12px;
-  align-items: center;
-  bottom: -100px;
-  color: #fff;
-  display: flex;
-  height: 26px;
-  transition: bottom 0.2s ease-in-out;
-  background: #222;
-  cursor: pointer;
-  opacity: 0.6;
-  position: fixed;
-  z-index: 30;
-  right: 30px;
+  margin: 5px -10px -20px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 }
 .back-to-top span {
   margin-right: 8px;
-  display: none;
 }
 .back-to-top .fa {
   text-align: center;
   width: 26px;
 }
-@media (max-width: 991px) {
-  .back-to-top {
-    right: 20px;
-  }
+.back-to-top.back-to-top-on {
+  cursor: pointer;
+  opacity: 0.6;
 }
-.back-to-top:hover {
+.back-to-top.back-to-top-on:hover {
   opacity: 0.8;
 }
-@media (max-width: 991px) {
-  .back-to-top {
-    opacity: 0.8;
-  }
-}
-.back-to-top:hover {
-  color: #fc6423;
-}
-.back-to-top.back-to-top-on {
-  bottom: 30px;
+.reading-progress-bar {
+  --progress: 0;
+  background: #37c6c0;
+  height: 3px;
+  position: fixed;
+  z-index: 50;
+  width: var(--progress);
+  left: 0;
+  top: 0;
 }
 .rtl.post-body p,
 .rtl.post-body a,
@@ -1970,6 +1994,9 @@ pre code {
   flex-basis: 100%;
   height: 0;
 }
+#busuanzi_container_page_pv {
+  display: none;
+}
 .post-nav {
   border-top: 1px solid #eee;
   display: flex;
@@ -2319,7 +2346,7 @@ header.header {
 .main-inner {
   border-radius: initial;
   box-sizing: border-box;
-  width: calc(100% - 252px);
+  width: calc(100% - 255px);
 }
 @media (max-width: 991px) {
   .main-inner {
@@ -2328,7 +2355,7 @@ header.header {
   }
 }
 .footer-inner {
-  padding-left: 252px;
+  padding-left: 255px;
 }
 @media (max-width: 991px) {
   .footer-inner {
@@ -2449,7 +2476,7 @@ header.header {
 .sidebar {
   position: -webkit-sticky;
   position: sticky;
-  top: 12px;
+  top: 15px;
 }
 @media (max-width: 991px) {
   .sidebar {
@@ -2462,8 +2489,8 @@ header.header {
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   box-sizing: border-box;
   color: var(--text-color);
-  margin-top: 12px;
-  max-height: calc(100vh - 24px);
+  margin-top: 15px;
+  max-height: calc(100vh - 30px);
   visibility: hidden;
 }
 .site-state-item {
@@ -2510,6 +2537,13 @@ header.header {
 .links-of-author-item a:hover {
   background: var(--body-bg-color);
 }
+.back-to-top {
+  background: var(--body-bg-color);
+  margin: -7px -10px -18px;
+}
+.back-to-top.back-to-top-on {
+  margin-top: 16px;
+}
 .main-inner .sub-menu,
 .main-inner .post-block,
 .main-inner .tabs-comment,
@@ -2523,7 +2557,7 @@ header.header {
 .main-inner .post-block:not(:first-child):not(:first-child) {
   border-radius: initial;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
-  margin-top: 12px;
+  margin-top: 15px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .main-inner .post-block:not(:first-child):not(:first-child) {
@@ -2541,7 +2575,7 @@ header.header {
 .main-inner .pagination {
   border-radius: initial;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
-  margin-top: 12px;
+  margin-top: 15px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .main-inner .tabs-comment,
@@ -2596,12 +2630,12 @@ header.header {
     padding: 8px;
   }
   .posts-expand .post-button {
-    margin: 12px 0;
+    margin: 15px 0;
   }
   .post-block {
-    padding: 12px;
+    padding: 15px;
   }
   .comments {
-    padding: 10px 12px;
+    padding: 10px 15px;
   }
 }
